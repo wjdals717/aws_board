@@ -26,7 +26,7 @@ public class ValidAop {
     @Around("pointCut()") /* 포인트컷 */
     public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
-        System.out.println("전처리");
+        System.out.println("ValidAop 전처리");
         //Validation 체크 -> 후처리 필요없음, 전처리만 필요
 
         Object[] args = proceedingJoinPoint.getArgs();

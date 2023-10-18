@@ -36,6 +36,6 @@ public class ArgsAop {
         Object target = proceedingJoinPoint.proceed();
         System.out.println("=======================================================");
 
-        return proceedingJoinPoint.proceed();
+        return target;
     }
 }
