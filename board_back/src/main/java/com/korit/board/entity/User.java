@@ -1,5 +1,6 @@
 package com.korit.board.entity;
 
+import com.korit.board.dto.PrincipalRespDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,5 +16,15 @@ public class User {
     private String password;
     private String name;
     private String nickname;
-    private int isEnabled;      //이메일 인증 여부 // 1 or 0
+    private int enabled;      //이메일 인증 여부 // 1 or 0
+
+    public PrincipalRespDto toPrincipalDto() {
+        return PrincipalRespDto.builder()
+                .userId(userId)
+                .email(email)
+                .name(name)
+                .nickname(nickname)
+                .enabled(enabled > 0)
+                .build();
+    }
 }

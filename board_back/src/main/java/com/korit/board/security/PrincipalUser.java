@@ -1,11 +1,13 @@
 package com.korit.board.security;
 
 import com.korit.board.entity.User;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+@Getter
 public class PrincipalUser implements UserDetails {
 
     private User user;
@@ -46,6 +48,6 @@ public class PrincipalUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return user.getIsEnabled() > 0;
+        return user.getEnabled() > 0;
     }
 }

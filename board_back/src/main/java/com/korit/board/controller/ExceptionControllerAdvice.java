@@ -1,6 +1,7 @@
 package com.korit.board.controller;
 
 import com.korit.board.aop.annotation.TimeAop;
+import com.korit.board.exception.AuthMailException;
 import com.korit.board.exception.DuplicatieException;
 import com.korit.board.exception.ValidException;
 import io.jsonwebtoken.JwtException;
@@ -63,5 +64,10 @@ public class ExceptionControllerAdvice {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(message);
     }
 
-
+    @ExceptionHandler(AuthMailException.class)
+    public ResponseEntity<?> mailException(AuthMailException mailException) {
+        Map<String, String> message = new HashMap<>();
+        message.put("authMail", mailException.getMessage());
+        return ResponseEntity.ok().body(message);
+    }
 }

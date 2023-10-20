@@ -10,13 +10,21 @@
         <result property="password"  column="password" />
         <result property="name"      column="name" />
         <result property="nickname"  column="nickname" />
-        <result property="isEnabled" column="enabled" />
+        <result property="enabled" column="enabled" />
     </resultMap>
 
     <insert id="saveUser" parameterType="com.korit.board.entity.User">
         insert into user_tb
         values(0, #{email}, #{password}, #{name}, #{nickname}, 0)
     </insert>
+
+    <update id="updateEnabledToEmail">
+        update user_tb
+        set
+            enabled = 1
+        where
+            email = #{email}
+    </update>
 
     <select id="checkDuplicate" parameterType="com.korit.board.entity.User" resultType="integer">
         select
