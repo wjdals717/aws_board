@@ -17,6 +17,7 @@ public class User {
     private String name;
     private String nickname;
     private int enabled;      //이메일 인증 여부 // 1 or 0
+    private String profileUrl;
 
     public PrincipalRespDto toPrincipalDto() {
         return PrincipalRespDto.builder()
@@ -25,6 +26,7 @@ public class User {
                 .name(name)
                 .nickname(nickname)
                 .enabled(enabled > 0)
+                .profileUrl(profileUrl)
                 .build();
     }
 }
