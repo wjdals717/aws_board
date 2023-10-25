@@ -4,17 +4,25 @@ import com.korit.board.entity.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
+import java.util.Map;
 
-@Getter
 public class PrincipalUser implements UserDetails {
-
+    @Getter
     private User user;
 
+    //일반 로그인 생성자
     public PrincipalUser(User user) {
         this.user = user;
     }
+
+//    //소셜 로그인 생성자
+//    public PrincipalUser(User user, Map<String, Object> attributes) {
+//        this.user = user;
+//        this.attributes = attributes;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

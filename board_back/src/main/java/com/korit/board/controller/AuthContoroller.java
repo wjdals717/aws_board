@@ -4,6 +4,7 @@ import com.korit.board.aop.annotation.ArgsAop;
 import com.korit.board.aop.annotation.ReturnAop;
 import com.korit.board.aop.annotation.TimeAop;
 import com.korit.board.aop.annotation.ValidAop;
+import com.korit.board.dto.MergeOauth2ReqDto;
 import com.korit.board.dto.SigninReqDto;
 import com.korit.board.dto.SignupReqDto;
 import com.korit.board.service.AccountService;
@@ -49,5 +50,11 @@ public class AuthContoroller {
     public ResponseEntity<?> authenticateMail (String token) {
         //주소의 토큰을 받고 유효한지 확인
         return ResponseEntity.ok(accountService.authenticateMail(token) ? "인증이 완료되었습니다" : "인증 실패");
+    }
+
+    @ValidAop
+    @PutMapping("/auth/oauth2/merge")       //수정 요청
+    public ResponseEntity<?> oauth2Merge(@Valid @RequestBody MergeOauth2ReqDto mergeOauth2ReqDto, BindingResult bindingResult) {
+        return ResponseEntity.ok(authService.mergeOauth2(mergeOauth2ReqDto));
     }
 }
