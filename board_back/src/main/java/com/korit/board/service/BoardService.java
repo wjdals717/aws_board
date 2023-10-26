@@ -22,6 +22,7 @@ import java.util.Map;
 public class BoardService {
     private final BoardMapper boardMapper;
 
+    //카테고리 리스트 가져오기
     public List<BoardCategoryRespDto> getBoardCategoriseAll(){
         List<BoardCategoryRespDto> boardCategoryRespDtos = new ArrayList<>();
         boardMapper.getBoardCategories().forEach(category -> {
@@ -37,7 +38,7 @@ public class BoardService {
             boardCategory = BoardCategory.builder()
                     .boardCategoryName(writeBoardReqDto.getCategoryName())
                     .build();
-            boardMapper.saveCategory(boardCategory);
+            boardMapper.saveCategory(boardCategory);        // 카테고리 DB에 저장
             writeBoardReqDto.setCategoryId(boardCategory.getBoardCategoryId());
         }
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -59,5 +60,14 @@ public class BoardService {
         });
 //        System.out.println(boardMapper.getBoardList(paramsMap));        // 결과값 List
         return boardListRespDtos;
+    }
+
+    public int getBoardCount(String categoryName, SearchBoardListReqDto searchBoardListReqDto) {
+        Map<String, Object> paramsMap = new HashMap<>();
+        paramsMap.put("categoryName", categoryName);
+        paramsMap.put("optionName", searchBoardListReqDto.getOptionName());
+        paramsMap.put("searchValue", searchBoardListReqDto.getSearchValue());
+
+        return boardMapper.getBoardCount(paramsMap);
     }
 }

@@ -33,6 +33,5 @@ public class JwtAuthenticationFilter extends GenericFilter {
         }
 
         chain.doFilter(request, response);
-
     }
 }
